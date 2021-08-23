@@ -76,7 +76,7 @@ class FacebookDriver extends HttpDriver implements VerifiesService
     /** @var DriverEventInterface */
     protected $driverEvent;
 
-    protected $facebookProfileEndpoint = 'https://graph.facebook.com/v3.0/';
+    protected $facebookProfileEndpoint = 'https://graph.facebook.com/v10.0/';
 
     /** @var bool If the incoming request is a FB postback */
     protected $isPostback = false;
@@ -363,10 +363,10 @@ class FacebookDriver extends HttpDriver implements VerifiesService
         } else {
             $recipient = ['id' => $matchingMessage->getSender()];
         }
-        $parameters = array_merge_recursive([
-            'messaging_type' => self::TYPE_RESPONSE,
-            'recipient' => $recipient,
-            'message' => [
++        $parameters = array_merge([
+             'messaging_type' => self::TYPE_RESPONSE,
+             'recipient' => $recipient,
+             'message' => [
                 'text' => $message,
             ],
         ], $additionalParameters);
